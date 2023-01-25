@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@ElynNg 
-ElynNg
-/
-HumanResources
-Public
-Cannot fork because you own this repository and are not a member of any organizations.
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-HumanResources/Main.java /
-@ElynNg
-ElynNg Update Main.java
-Latest commit fde3c9e on Nov 20, 2022
- History
- 1 contributor
-428 lines (372 sloc)  15.5 KB
-
 package HumanResources;
 
 import java.util.Scanner;
@@ -333,7 +302,7 @@ public class Main {
 				depts.get(1).numOfStaff++;
 			}
 			
-			//NHẬP CHỨC DANH
+			//ENTER TITLE
 			System.out.println("Manager's title: ");
 			System.out.println("1. Business Leader");
 			System.out.println("2. Project Leader");
@@ -457,19 +426,3 @@ public class Main {
 			}
 		}
 }
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-HumanResources/Main.java at main · ElynNg/HumanResources
-1
