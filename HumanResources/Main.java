@@ -1,3 +1,34 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@ElynNg 
+ElynNg
+/
+HumanResources
+Public
+Cannot fork because you own this repository and are not a member of any organizations.
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+HumanResources/Main.java /
+@ElynNg
+ElynNg Update Main.java
+Latest commit fde3c9e on Nov 20, 2022
+ History
+ 1 contributor
+428 lines (372 sloc)  15.5 KB
+
 package HumanResources;
 
 import java.util.Scanner;
@@ -10,7 +41,7 @@ public class Main {
 		ArrayList<Staff> staffs = new ArrayList<>();
 		ArrayList<Department> depts = new ArrayList<>();
 		ArrayList<String> managerTitle = new ArrayList<>();
-		int menuNumber; //số người dùng nhập trong menu
+		int menuNumber;
 		
 		boolean exit = false;
 		
@@ -21,7 +52,7 @@ public class Main {
     		menuNumber = displayMenu(input);
     
     		while (menuNumber < 1 && menuNumber > 9) {
-    			System.out.println("Số bạn nhập không có trong menu");
+    			System.out.println("Incorrect number");
     			menuNumber = displayMenu(input);
     		}
     		
@@ -37,11 +68,11 @@ public class Main {
     			break;
     		case 4:
     			addStaff(staffs,depts, managerTitle);
-    				//XEM LẠI THÔNG TIN NHÂN VIÊN ĐÃ NHẬP
-    				System.out.println("1. Xem danh sách nhân viên hiện có");
-    				System.out.println("2. Chỉ xem thông tin nhân viên vừa nhập");
-    				System.out.println("3. Thoát");
-    				System.out.println("Bạn chọn: ");
+    				//View updated staff information
+    				System.out.println("1. View updated list of employees");
+    				System.out.println("2. Only view entered employee");
+    				System.out.println("3. Skip");
+    				System.out.println("Your choice is: ");
     				int checkStaffInformation = input.nextInt();
     				switch (checkStaffInformation) {
     					case 1: 
@@ -53,7 +84,7 @@ public class Main {
     					case 3:
     						break;
     					default: 
-    						System.out.println("Nhập lại:");
+    						System.out.println("Incorrect number. Please enter the correct number.");
     						break;
     				}
     			break;
@@ -76,14 +107,14 @@ public class Main {
 		}
 	}
 	
-	//0. KHỞI TẠO CÁC THÔNG TIN NHÂN VIÊN
+	//0. CREATE STAFF INFORMATION
 		static void createInformation(ArrayList<Staff> staffs, ArrayList<Department> depts, ArrayList<String> managerTitle) {
-			//KHỞI TẠO DANH SÁCH CHỨC DANH
+			//CREATE LIST OF MANAGER TITLE
 			managerTitle.add("Business Leafer");
 			managerTitle.add("Project Leader");
 			managerTitle.add("Technical Leader");
 			
-			//KHỞI TẠO DANH SÁCH BỘ PHẬN
+			//CREATE LIST OF DEPARTMENT
 			Department hr = new Department("hr", "Human Resource", 2);
 			Department it = new Department("it", "Information Technology", 2);
 			Department mkt = new Department("mkt", "Marketing", 0);
@@ -92,14 +123,14 @@ public class Main {
 			depts.add(it);
 			depts.add(mkt);
 			
-			//KHỞI TẠO DANH SÁCH NHÂN VIÊN
+			//CREATE LIST OF STAFF
 			Employee staff_1 = new Employee("E001", "NGUYEN VAN A", 28, 3.2f, "10.10.2010", hr, 10, 5.5f);
 			Employee staff_2 = new Employee("E002", "TRAN THI B", 24, 2.2f, "09.10.2019", hr, 7, 10.5f);
 			
 			staffs.add(staff_1);
 			staffs.add(staff_2);
 			
-			//KHỞI TẠO DANH SÁCH QUẢN LÝ
+			//CREATE LIST OF MANAGER
 			Manager manager_1 = new Manager("M001", "LE THI C", 25, (float)2.5, "11.11.2010", it, 5, "Business Leader");
 			Manager manager_2 = new Manager("M002", "TA VAN LUC", 32, (float)4.5, "01.11.2010", it, 1, "Technical Leader");
 			
@@ -107,25 +138,25 @@ public class Main {
 			staffs.add(manager_2);
 		}
 		
-	//0.1 HIỂN THỊ RA MÀN HÌNH MENU CÁC CHỨC NĂNG
+	//0.1 DISPLAY LIST OF FUNCTION
 		static int displayMenu(Scanner input) {
-			System.out.println("1. Hiển thị danh sách nhân viên hiện có trong công ty");
-			System.out.println("2. Hiển thị các bộ phận trong công ty");
-			System.out.println("3. Hiển thị các nhân viên theo từng bộ phận");
-			System.out.println("4. Thêm nhân viên mới vào công ty");
-			System.out.println("5. Tìm kiếm thông tin nhân viên theo tên hoặc ID");
-			System.out.println("6. Hiển thị bảng lương nhân viên của toàn công ty");
-			System.out.println("7. Hiển thị bảng lương nhân viên theo thứ tự tăng dần");
-			System.out.println("8. Hiển thị bảng lương nhân viên theo thứ tự giảm dần");
-			System.out.println("9. Thoát chương trình");
-			System.out.println("Lựa chọn của bạn là: ");
+			System.out.println("1. Display the list of existing employees in the company");
+			System.out.println("2. Display list of departments in the company");
+			System.out.println("3. Display employees by department");
+			System.out.println("4. Add new employee to the company");
+			System.out.println("5. Search for employee information by Name or ID");
+			System.out.println("6. Display payroll of employees throughout the company");
+			System.out.println("7. Display employee payroll in ascending order");
+			System.out.println("8. Display employee payroll in descending order");
+			System.out.println("9. Exit the program");
+			System.out.println("Your choice is: ");
 			int menuNumber = (int)input.nextInt();
 			return menuNumber;
 		}
 	
-	//1. HIỂN THỊ DANH SÁCH NHÂN VIÊN HIỆN CÓ TRONG CÔNG TY
+	//1. DISPLAY LIST OF EXISTING STAFFS
 		static void displayListOfExistingStaff(ArrayList<Staff> staffs) {
-			System.out.println("Danh sách nhân viên hiện có trong công ty:");
+			System.out.println("List of existing employees in the company:");
 			System.out.println("ID\t | NAME \t\t | AGE\t | COEFFICIENT OF SALARY  | INCOME DATE | DEPARTMENT \t\t    | OFFDAY | OVERTIME/ TITLE      | SALARY");
 			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 			for (int i = 0; i < staffs.size(); i++) {
@@ -133,9 +164,9 @@ public class Main {
 			}
 		}
 		
-	//2. HIỂN THỊ DANH SÁCH BỘ PHẬN TRONG CÔNG TY
+	//2. DISPLAY LIST OF DEPARTMENT
 		static void displayDepartment(ArrayList<Department> depts) {
-			System.out.println("Danh sách các bộ phận: ");
+			System.out.println("List departments in the company: ");
 			System.out.println("Departmen ID | Department Name        | Number of Staffs");
 			System.out.println("----------------------------------------------------------");
 			
@@ -143,11 +174,11 @@ public class Main {
 				depts.get(i).displayInformation();
 			}
 		}
-	//3. HIỂN THỊ DANH SÁCH NHÂN VIÊN THEO BỘ PHẬN
+	//3. DISPLAY LIST OF STAFF BY DEPARTMENT
 		static void displayStaffbyDepartment(ArrayList<Staff> staffs, ArrayList<Department> depts) {
-			System.out.println("Danh sách nhân viên theo bộ phận: ");
+			System.out.println("List employees by department: ");
 			for (int i = 0; i < depts.size(); i++) {
-				System.out.println("Danh sách nhân viên trong bộ phận " + depts.get(i).getDeptName() + ": ");
+				System.out.println("List of employee in " + depts.get(i).getDeptName() + "department: ");
 				System.out.println("ID\t | NAME \t\t | AGE\t | COEFFICIENT OF SALARY  | INCOME DATE | DEPARTMENT \t\t    | OFFDAY | OVERTIME/ TITLE      | SALARY");
 				System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 				for (int j = 0; j < staffs.size(); j++) {
@@ -158,30 +189,30 @@ public class Main {
 				System.out.println();
 			}
 		}
-	//4. THÊM NHÂN VIÊN MỚI VÀO CÔNG TY
+	//4. ADD NEW STAFF
 		static void addStaff(ArrayList<Staff> staffs, ArrayList<Department> depts,ArrayList<String> managerTitle) {
-			int addStaffNumber; //số người dùng nhập trong mục thêm nhân viên
+			int addStaffNumber; //ADD NEW STAFF
 			boolean pass = false;
 			Scanner input = new Scanner(System.in);
 			
 			addStaffNumber = menuAddStaff(input);
 			while (addStaffNumber != 1 && addStaffNumber != 2) {
-				System.out.println("Số bạn nhập không có trong menu");
+				System.out.println("Incorrect number");
 				addStaffNumber = menuAddStaff(input);
 			}
 			
-			System.out.println("Lựa chọn của bạn là: " + addStaffNumber);
+			System.out.println("Your choice is: " + addStaffNumber);
 			
-			//NHẬP ID
-			System.out.println("Nhập ID: ");
+			//ENTER NEW STAFF ID
+			System.out.println("Enter ID: ");
 			String id = input.nextLine();
 			
-			//KIỂM TRA XEM ID CÓ TRÙNG HAY KHÔNG
+			//CHECK IF THIS ID IS ALREADY EXISTS
 			while (pass == false) {
 				for (int i = 0; i < staffs.size(); i++) {
 					if (id.equalsIgnoreCase(staffs.get(i).getId())){
-						System.out.println("ID đã được sử dụng");
-						System.out.println("Nhập lại: ");
+						System.out.println("ID has already exists");
+						System.out.println("Enter the correct ID: ");
 						id = input.nextLine();
 						break;
 					}
@@ -191,29 +222,29 @@ public class Main {
 				}
 			};
 			
-			//NHẬP TÊN 
-			System.out.println("Nhập tên: ");
+			//ENTER NEW STAFF NAME
+			System.out.println("Enter name: ");
 			String name = input.nextLine();
 			name = name.toUpperCase();
 			
-			//NHẬP TUỔI
-			System.out.println("Nhập tuổi: ");
+			//AGE
+			System.out.println("Age: ");
 			int age = input.nextInt();
 			
-			//NHẬP HỆ SỐ LƯƠNG
-			System.out.println("Nhập hệ số lương: ");
+			//COEFFICIENT OF SALARY
+			System.out.println("Coefficient of salary: ");
 			float coeffSalary = input.nextFloat();
 			input.nextLine();
 			
-			//NHẬP NGÀY VÀO LÀM
-			System.out.println("Nhập ngày vào làm: ");
+			//ENTER INCOME DATE
+			System.out.println("Income Date: ");
 			String incomeDate = input.next();
 			
-			//NHẬP SỐ NGÀY NGHỈ PHÉP
-			System.out.println("Nhập số ngày nghỉ phép: ");
+			//ENTER STAFF OFF DAY
+			System.out.println("Off Day: ");
 			int offDay = (int)input.nextInt();
 			
-			//NHẬP BỘ PHẬN
+			//SELECT STAFF DEPARTMENT
 			int addDepartmentNumber = displayDepartmentMenu(input);
 			
 			if (addStaffNumber == 1) {
@@ -226,30 +257,30 @@ public class Main {
 			
 		}
 		
-	//4.0 HIỂN THỊ MENU CHỌN NHÂN VIÊN
+	//4.0 DISPLAY SELECT KIND OF STAFF MENU
 		static int menuAddStaff(Scanner input) {
-			System.out.println("1. Thêm nhân viên thông thường");
-			System.out.println("2. Thêm nhân viên quản lý");
+			System.out.println("1. Add general staff");
+			System.out.println("2. Add manager");
 			int num = input.nextInt();
 			input.nextLine();
 			return num;
 		}
 		
-	//4.1 HIỂN THỊ DANH SÁCH BỘ PHẬN
+	//4.1 DISPLAY LIST OF DEPARTMENT
 		static int displayDepartmentMenu(Scanner input) {
 			System.out.println("1. HR - Human Resources");
 			System.out.println("2. IT - Information Technology");
 			System.out.println("3. MKT - Marketing");
-			System.out.println("Bạn chọn: ");
+			System.out.println("Your choice is: ");
 			int num = input.nextInt();
 			while (num != 1 && num != 2 && num !=3 ) {
-				System.out.println("Số bạn chọn không có trong menu");
+				System.out.println("Incorrect number");
 				num = input.nextInt();
 			}
 			return num;
 		}
 		
-	//4.2 THÊM NHÂN VIÊN THÔNG THƯỜNG
+	//4.2 ADD GENERAL STAFF
 		static void addGeneralStaff(ArrayList<Staff> staffs, ArrayList<Department> depts, Scanner input, String id, String name, int age, float coeffSalary, String incomeDate, int offDay, int num) {
 			Employee newStaff = new Employee();
 			
@@ -272,15 +303,15 @@ public class Main {
 				depts.get(2).numOfStaff++;
 			}
 			
-			//NHẬP SỐ GIỜ LÀM THÊM 
-			System.out.println("Nhập số giờ làm thêm: ");
+			//ENTER THE NUMBER OF OVERTIME HOURS
+			System.out.println("Overtime: ");
 			float overtime = input.nextFloat();
 			newStaff.setOvertime(overtime);
 			
 			staffs.add(newStaff);
 		}
 		
-	//4.3 THÊM NHÂN VIÊN QUẢN LÝ
+	//4.3 ADD MANAGER
 		static void addManager(ArrayList<Staff> staffs, ArrayList<Department> depts,ArrayList<String> managerTitle, int num, Scanner input, String id, String name, int age, float coeffSalary, String incomeDate, int offDay) {
 			Manager newManager = new Manager();
 			
@@ -303,15 +334,14 @@ public class Main {
 			}
 			
 			//NHẬP CHỨC DANH
-			System.out.println("Chức danh: ");
+			System.out.println("Manager's title: ");
 			System.out.println("1. Business Leader");
 			System.out.println("2. Project Leader");
 			System.out.println("3. Technical Leader");
-			System.out.println("Nhập chức danh: ");
+			System.out.println("Enter the title: ");
 			int addTitleNumber = input.nextInt();
 			while (addTitleNumber != 1 && addTitleNumber != 2 && addTitleNumber != 3) {
-				System.out.println("Số bạn nhập không có trong menu");
-				System.out.println("Nhập lại: ");
+				System.out.println("Incorrect number");
 				addTitleNumber = input.nextInt();			}
 			if (addTitleNumber == 1) {
 				newManager.setTitle("Business Leader");
@@ -326,28 +356,27 @@ public class Main {
 			staffs.add(newManager);
 		}
 	
-	//5. TÌM KIẾM THÔNG TIN NHÂN VIÊN THEO TÊN HOẶC ID
+	//5. SEARCH FOR STAFF BY NAME OR ID 
 		static void searchForStaffByNameOrID(ArrayList<Staff> staffs) {
 			Scanner input = new Scanner(System.in);
-			System.out.println("1. Tìm nhân viên theo tên");
-			System.out.println("2. Tìm nhân viên theo ID");
-			System.out.println("Bạn chọn: ");
+			System.out.println("1. Search for staff by Name");
+			System.out.println("2. Search for staff by ID");
+			System.out.println("Your choice is: ");
 			int searchStaffNumber = input.nextInt();
 			
 			while (searchStaffNumber != 1 && searchStaffNumber != 2) {
-				System.out.println("Số không có trong menu");
-				System.out.println("Nhập lại: ");
+				System.out.println("Incorrect number");
 				searchStaffNumber = input.nextInt();
 			}
 			
 			if (searchStaffNumber == 1) {
 				boolean check = false;
-				System.out.println("Nhập tên nhân viên cần tìm");
+				System.out.println("Enter the name of the staff you're looking for: ");
 				String staffName = input.next().toUpperCase();
 				
 				for (int i = 0; i < staffs.size(); i++) {
 					if (staffs.get(i).getName().contains(staffName)) {
-						System.out.println("Kết quả: ");
+						System.out.println("Result: ");
 						System.out.println("ID\t | NAME \t\t | AGE\t | COEFFICIENT OF SALARY  | INCOME DATE | DEPARTMENT \t\t    | OFFDAY | OVERTIME/ TITLE      | SALARY");
 						System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 						staffs.get(i).displayInformation();
@@ -355,17 +384,17 @@ public class Main {
 					}
 				}
 				if (check == false) {
-					System.out.println("Không tìm thấy");
+					System.out.println("Not found");
 				}
 			}
 			else {
 				boolean check = false;
-				System.out.println("Nhập ID nhân viên cần tìm: ");
+				System.out.println("Enter the ID of the staff you're looking for: ");
 				String id = input.next();
 				input.nextLine();
 				for (int i = 0; i < staffs.size(); i++) {
 					if (staffs.get(i).getId().equalsIgnoreCase(id)) {
-						System.out.println("Kết quả: ");
+						System.out.println("Result: ");
 						System.out.println("ID\t | NAME \t\t | AGE\t | COEFFICIENT OF SALARY  | INCOME DATE | DEPARTMENT \t\t    | OFFDAY | OVERTIME/ TITLE      | SALARY");
 						System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 						staffs.get(i).displayInformation();
@@ -373,15 +402,15 @@ public class Main {
 					}
 				}
 				if (check == false) {
-					System.out.println("Không tìm thấy");
+					System.out.println("Not found");
 				}
 				
 			}
 		}
 		
-	//6. HIỂN THỊ BẢNG LƯƠNG NHÂN VIÊN TOÀN BỘ CÔNG TY
+	//6. DISPLAY ALL STAFF SALARY
 		static void displayAllStaffSalary(ArrayList<Staff> staffs) {
-			System.out.println("BẢNG LƯƠNG CỦA NHÂN VIÊN TOÀN CÔNG TY:");
+			System.out.println("ALL STAFF SALARY:");
 			System.out.println("ID\t | NAME \t\t | AGE\t | COEFFICIENT OF SALARY  | INCOME DATE | DEPARTMENT \t\t    | OFFDAY | OVERTIME/ TITLE      | SALARY");
 			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 			for (int i = 0; i < staffs.size(); i++) {
@@ -389,7 +418,7 @@ public class Main {
 			}
 		}
 	
-	//7. HIỂN THỊ BẢNG LƯƠNG THEO THỨ TỰ TĂNG DẦN
+	//7. DISPLAY STAFF SALARY IN ASCENDING
 		static void displaySalaryInAscending(ArrayList<Staff> staffs) {
 			Collections.sort(staffs, new Comparator<Staff>() {
                 @Override
@@ -398,7 +427,7 @@ public class Main {
                 }
             });
 			
-			System.out.println("BẢNG LƯƠNG NHÂN VIÊN THEO THỨ TỰ TĂNG DẦN: ");
+			System.out.println("STAFF SALARY IN ASCENDING: ");
 			System.out.println("ID\t | NAME \t\t | AGE\t | COEFFICIENT OF SALARY  | INCOME DATE | DEPARTMENT \t\t    | OFFDAY | OVERTIME/ TITLE      | SALARY");
 			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 			
@@ -409,7 +438,7 @@ public class Main {
 			
 		}
 	
-	//8. HIỂN THỊ BẢNG LƯƠNG THEO THỨ TỰ GIẢM DẦN
+	//8. DISPLAY STAFF SALARY IN DESCENDING
 		static void displaySalaryInDescending(ArrayList<Staff> staffs) {
 			Collections.sort(staffs, new Comparator<Staff>() {
                 @Override
@@ -418,7 +447,7 @@ public class Main {
                 }
             });
 			
-			System.out.println("BẢNG LƯƠNG NHÂN VIÊN THEO THỨ TỰ TĂNG DẦN: ");
+			System.out.println("STAFF SALARY IN DESCENDING: ");
 			System.out.println("ID\t | NAME \t\t | AGE\t | COEFFICIENT OF SALARY  | INCOME DATE | DEPARTMENT \t\t    | OFFDAY | OVERTIME/ TITLE      | SALARY");
 			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 			
@@ -428,3 +457,19 @@ public class Main {
 			}
 		}
 }
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+HumanResources/Main.java at main · ElynNg/HumanResources
+1
