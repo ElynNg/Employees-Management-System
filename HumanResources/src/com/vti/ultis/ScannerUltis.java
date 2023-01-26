@@ -68,5 +68,7 @@ public class ScannerUltis {
 		}
 	}
 
-
+    public static void nextLine() {
+		scanner.nextLine();
+    }
 }
