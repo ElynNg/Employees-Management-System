@@ -1,5 +1,7 @@
 package com.vti.frontend;
 
+import com.vti.entity.Account;
+
 public class Main {
     public static void main(String[] args) {
         int menuNumber; //số người dùng nhập trong menu
@@ -15,7 +17,7 @@ public class Main {
 
             switch (menuNumber) {
                 case 1:
-                    Functions.displayListOfExistingStaff(staffs);
+                    Functions.displayListOfExistingStaff();
                     break;
                 case 2:
                     displayDepartment(depts);
