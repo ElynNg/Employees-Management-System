@@ -11,4 +11,4 @@ The program have 8 main function:
   7. Display employee payroll in ascending order
   8. Display employee payroll in descending order
 # So using our knowledge in Java and also mySQL we connect the program and the database together.
-# In order to review the process we received from SWedu program last summer after the long time gain more knowledge and simulate how the real system actully work
+# In order to review the process we received from SWedu program last summer after the long time gain more knowledge and simulate how the real system actually work
