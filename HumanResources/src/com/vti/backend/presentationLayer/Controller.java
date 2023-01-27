@@ -2,6 +2,7 @@ package com.vti.backend.presentationLayer;
 
 import com.vti.backend.businessLayer.Service;
 import com.vti.entity.Account;
+import com.vti.entity.Department;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,4 +28,26 @@ public class Controller {
             return null;
         }
     }
+
+    public List<Department> displayDepartment() {
+        try{
+            return service.displayDepartment();
+        }catch (ClassNotFoundException | SQLException e){
+            System.out.println("ClassNotFound or SQL Exception occur");
+            return null;
+        }
+    }
+
+    public List<Account> showEmployeeByDepartment(){
+        try{
+            return service.showEmployeeByDepartment();
+        }catch (ClassNotFoundException e){
+            System.out.println("ClassNotFound occur");
+            return null;
+        }catch (SQLException e){
+            System.out.println("SQL Exception occur");
+            return null;
+        }
+    }
+
 }

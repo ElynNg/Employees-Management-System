@@ -2,12 +2,12 @@ package com.vti.entity;
 
 public class Department {
     private int id;
-    private String name;
+    private DepartmentE name;
 
     public Department() {
     }
 
-    public Department(int id, String name) {
+    public Department(int id, DepartmentE name) {
         this.id = id;
         this.name = name;
     }
@@ -20,11 +20,11 @@ public class Department {
         this.id = id;
     }
 
-    public String getName() {
+    public DepartmentE getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(DepartmentE name) {
         this.name = name;
     }
 }

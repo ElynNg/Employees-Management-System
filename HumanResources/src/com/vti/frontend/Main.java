@@ -15,8 +15,15 @@ public class Main {
                     functions.displayListOfExistingStaff();
                     break;
                 case 2:
+                    functions.displayDepartment();
                     break;
                 case 3:
+                    functions.showEmployeeByDepartment();
+                    break;
+                case 4:
+                    functions.addAccount();
+                    break;
+                case 9:
                     ScannerUltis.nextLine();
                     exit = true;
                     break;

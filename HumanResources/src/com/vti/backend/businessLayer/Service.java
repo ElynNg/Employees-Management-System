@@ -2,6 +2,7 @@ package com.vti.backend.businessLayer;
 
 import com.vti.backend.dataLayer.Repository;
 import com.vti.entity.Account;
+import com.vti.entity.Department;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,5 +19,15 @@ public class Service implements IService{
     @Override
     public List<Account> displayListOfExistingStaff() throws SQLException, ClassNotFoundException {
         return repository.displayListOfExistingStaff();
+    }
+
+    @Override
+    public List<Department> displayDepartment() throws SQLException, ClassNotFoundException {
+        return repository.displayDepartment();
+    }
+
+    @Override
+    public List<Account> showEmployeeByDepartment() throws SQLException, ClassNotFoundException {
+        return repository.showEmployeeByDepartment();
     }
 }
