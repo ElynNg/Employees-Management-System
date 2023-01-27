@@ -50,4 +50,7 @@ public class Controller {
         }
     }
 
+    public boolean addAccount(Account account) throws SQLException, ClassNotFoundException {
+        return service.addAccount(account);
+    }
 }

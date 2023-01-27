@@ -30,4 +30,9 @@ public class Service implements IService{
     public List<Account> showEmployeeByDepartment() throws SQLException, ClassNotFoundException {
         return repository.showEmployeeByDepartment();
     }
+
+    @Override
+    public boolean addAccount(Account account) throws SQLException, ClassNotFoundException {
+        return repository.addAccount(account);
+    }
 }

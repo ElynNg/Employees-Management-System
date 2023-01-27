@@ -12,4 +12,6 @@ public interface IRepository {
     List<Department> displayDepartment() throws SQLException, ClassNotFoundException;
 
     List<Account> showEmployeeByDepartment() throws SQLException, ClassNotFoundException;
+
+    boolean addAccount(Account account) throws SQLException, ClassNotFoundException;
 }

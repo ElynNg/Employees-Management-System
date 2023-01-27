@@ -49,7 +49,7 @@ public class Repository implements IRepository{
         while (resultSet.next()){
             department = new Department();
             department.setId(resultSet.getInt("department_id"));
-            department.setName(DepartmentE.valueOf(resultSet.getString("name")));
+            department.setName(DepartmentE.valueOf(resultSet.getString("name").toUpperCase()));
             departmentList.add(department);
         }
         return departmentList;
@@ -72,6 +72,19 @@ public class Repository implements IRepository{
             accountList.add(account);
         }
         return accountList;
+    }
+
+    @Override
+    public boolean addAccount(Account account) throws SQLException, ClassNotFoundException {
+        String sql = "INSERT INTO `projectmanagement`.`account` (`FullName`, `department_id`, `Email`, `Password`, `Role`) VALUES (?, ?, ?, ?, ?);";
+        PreparedStatement preparedStatement = jdbc.createPrepareStatement(sql);
+        preparedStatement.setString(1,account.getName());
+        preparedStatement.setInt(2,account.getDepartment_id());
+        preparedStatement.setString(3,account.getEmail());
+        preparedStatement.setString(4, account.getPassword());
+        preparedStatement.setString(5, account.getRole().toString());
+        if (preparedStatement.executeUpdate() == 1) return true;
+        return false;
     }
 
 
