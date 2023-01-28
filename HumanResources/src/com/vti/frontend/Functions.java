@@ -12,6 +12,7 @@ import java.util.List;
 
 public class Functions {
     private List<Account> listAccount;
+
     private Controller controller;
 
     public Functions() {
@@ -20,23 +21,27 @@ public class Functions {
     }
 
     public void displayMenu() {
-            System.out.println("please select options");
+            System.out.println("Select one of these options below: ");
             String leftAlignFormat = "| %-86s |%n";
             System.out.println("+----------------------------------------------------------------------------------------+");
-            System.out.println("|                                      Choose please                                     |");
+            System.out.println("|                                         MENU                                           |");
             System.out.println("+----------------------------------------------------------------------------------------+");
-            System.out.format(leftAlignFormat, "1. List user in system");
-            System.out.format(leftAlignFormat, "2. Show existing department");
+            System.out.format(leftAlignFormat, "1. List of existing employees");
+            System.out.format(leftAlignFormat, "2. List of existing department");
             System.out.format(leftAlignFormat, "3. Show employees by department");
-            System.out.format(leftAlignFormat, "4. add account");
-            System.out.format(leftAlignFormat, "5. Search Staff by name or id");
+            System.out.format(leftAlignFormat, "4. Add new employee");
+            System.out.format(leftAlignFormat, "5. Search for employee by Name or ID");
+            System.out.format(leftAlignFormat, "6. Display payroll of all employees");
+            System.out.format(leftAlignFormat, "7. Display payroll in ascending order");
+            System.out.format(leftAlignFormat, "8. Display payroll in descending order");
+            System.out.format(leftAlignFormat, "9. Exit the program");
             System.out.println("+----------------------------------------------------------------------------------------+");
     }
 
     public void displayListOfExistingStaff () {
             List<Account> accountList = controller.displayListOfExistingStaff();
             System.out.println("+----+------------------------+------------------------+------------------------+------------------------+--------+");
-            System.out.println("| ID |        FullName        |        Department      |          Email         |        password        |  Role  |");
+            System.out.println("| ID |        FullName        |        Department      |          Email         |        Password        |  Role  |");
             System.out.println("+----+------------------------+------------------------+------------------------+------------------------+--------+");
             for (Account a : accountList) {
                 String department = null;
@@ -47,7 +52,7 @@ public class Functions {
                 } else if (a.getDepartment_id() == 3) {
                     department = "TECHNICAL";
                 } else if (a.getDepartment_id() == 4) {
-                    department = "HUMANRESOURCES";
+                    department = "HUMAN RESOURCES";
                 }
                 System.out.format("| %-2d | %-22s | %-22s | %-22s | %-22s | %-6s |%n", a.getId(), a.getName(), department, a.getEmail(), a.getPassword(), a.getRole());
             }
@@ -69,7 +74,7 @@ public class Functions {
     public void showEmployeeByDepartment() {
         List<Account> accountList = controller.showEmployeeByDepartment();
         System.out.println("+--------------+------------+------------------------+------------------------+------------------------+--------+");
-        System.out.println("| DepartmentID |     ID     |        FullName        |          Email         |        password        |  Role  |");
+        System.out.println("| DepartmentID |     ID     |        FullName        |          Email         |        Password        |  Role  |");
         System.out.println("+--------------+------------+------------------------+------------------------+------------------------+--------+");
         for (Account a : accountList) {
             System.out.format("|   %-10d |%-12d| %-22s | %-22s | %-22s | %-6s |%n", a.getDepartment_id(), a.getId(),a.getName(), a.getEmail(), a.getPassword(), a.getRole());
@@ -80,13 +85,13 @@ public class Functions {
     public void addAccount() {
         ScannerUltis.nextLine();
         Account account = new Account();
-        System.out.println("enter name:");
+        System.out.println("Employee's name: ");
         account.setName(ScannerUltis.inputName());
-        System.out.println("enter department:");
+        System.out.println("Department: ");
         System.out.println("1. Accounting");
         System.out.println("2. IT");
         System.out.println("3. Technical");
-        System.out.println("4. HumanResources");
+        System.out.println("4. Human Resources");
         switch (ScannerUltis.inputIntPositive()){
             case 1:
                 account.setDepartment_id(1);
@@ -103,11 +108,11 @@ public class Functions {
             default:
                 break;
         }
-        System.out.println("enter email");
+        System.out.println("Email: ");
         account.setEmail(ScannerUltis.inputEmail());
-        System.out.println("enter password");
+        System.out.println("Set new password: ");
         account.setPassword(ScannerUltis.inputPassword());
-        System.out.println("enter Role");
+        System.out.println("Role: ");
         System.out.println("1. admin");
         System.out.println("2. user");
         switch (ScannerUltis.inputIntPositive()){
@@ -122,10 +127,10 @@ public class Functions {
         }
         try {
             if (controller.addAccount(account)){
-                System.out.println("new Account have been added!");
+                System.out.println("New account have been added!");
             }else System.out.println("cannot add Account!!!");
         }catch (SQLException | ClassNotFoundException e){
-            System.out.println("SQLException or ClassNotFoundException occur !!!");
+            System.err.println("SQLException or ClassNotFoundException occur !!!");
         }
 
     }
@@ -135,7 +140,7 @@ public class Functions {
         String input = ScannerUltis.inputString();
         Account account = controller.searchStaffByNameOrID(input);
         System.out.println("+----+------------------------+------------------------+------------------------+------------------------+--------+");
-        System.out.println("| ID |        FullName        |        DepartmentID      |          Email         |        password        |  Role  |");
+        System.out.println("| ID |        FullName        |        DepartmentID      |          Email         |        Password        |  Role  |");
         System.out.println("+----+------------------------+------------------------+------------------------+------------------------+--------+");
             String department = null;
             if (account.getDepartment_id() == 1){
@@ -145,9 +150,21 @@ public class Functions {
             } else if (account.getDepartment_id() == 3) {
                 department = "TECHNICAL";
             } else if (account.getDepartment_id() == 4) {
-                department = "HUMANRESOURCES";
+                department = "HUMAN RESOURCES";
             }
             System.out.format("| %-2d | %-22s | %-22s | %-22s | %-22s | %-6s |%n", account.getId(), account.getName(), department, account.getEmail(), account.getPassword(), account.getRole());
         System.out.println("+----+------------------------+------------------------+------------------------+------------------------+--------+");
+    }
+
+    public void displaySalary() throws SQLException, ClassNotFoundException {
+
+    }
+
+    public void displaySalaryASC() throws SQLException, ClassNotFoundException {
+
+    }
+
+    public void displaySalaryDESC() throws SQLException, ClassNotFoundException {
+
     }
 }
