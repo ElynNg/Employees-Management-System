@@ -28,12 +28,21 @@ public class Main {
                 case 5:
                     functions.searchStaffByNameOrID();
                     break;
+                case 6:
+                    functions.displaySalary();
+                    break;
+                case 7:
+                    functions.displaySalaryASC();
+                    break;
+                case 8:
+                    functions.displaySalaryDESC();
+                    break;
                 case 9:
                     ScannerUltis.nextLine();
                     exit = true;
                     break;
                 default:
-                    System.out.println("enter again(1->9)");
+                    System.err.println("Your choice is not exist in the menu. Try again");
                     break;
             }
         }
