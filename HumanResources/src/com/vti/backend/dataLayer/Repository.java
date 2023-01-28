@@ -87,5 +87,40 @@ public class Repository implements IRepository{
         return false;
     }
 
+    @Override
+    public Account searchStaffByNameOrID(String input) throws SQLException, ClassNotFoundException {
+        Account account = new Account();
+        try{
+            int i = Integer.parseInt(input);
+            String sql = "SELECT * FROM projectmanagement.account WHERE id = ?;";
+            PreparedStatement preparedStatement = jdbc.createPrepareStatement(sql);
+            preparedStatement.setInt(1, i);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                account.setId(resultSet.getInt("id"));
+                account.setName(resultSet.getString("FullName"));
+                account.setEmail(resultSet.getString("Email"));
+                account.setPassword(resultSet.getString("Password"));
+                account.setRole(Role.valueOf(resultSet.getString("Role")));
+                account.setDepartment_id(resultSet.getInt("department_id"));
+            }
+            return account;
+        }catch (NumberFormatException e){
+            String sql = "SELECT * FROM projectmanagement.account WHERE FullName = ?;";
+            PreparedStatement preparedStatement = jdbc.createPrepareStatement(sql);
+            preparedStatement.setString(1, input);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                account.setId(resultSet.getInt("id"));
+                account.setName(resultSet.getString("FullName"));
+                account.setEmail(resultSet.getString("Email"));
+                account.setPassword(resultSet.getString("Password"));
+                account.setRole(Role.valueOf(resultSet.getString("Role")));
+                account.setDepartment_id(resultSet.getInt("department_id"));
+            }
+            return account;
+        }
+    }
+
 
 }

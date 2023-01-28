@@ -35,4 +35,9 @@ public class Service implements IService{
     public boolean addAccount(Account account) throws SQLException, ClassNotFoundException {
         return repository.addAccount(account);
     }
+
+    @Override
+    public Account searchStaffByNameOrID(String input) throws SQLException, ClassNotFoundException {
+        return repository.searchStaffByNameOrID(input);
+    }
 }

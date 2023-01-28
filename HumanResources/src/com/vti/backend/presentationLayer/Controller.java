@@ -53,4 +53,8 @@ public class Controller {
     public boolean addAccount(Account account) throws SQLException, ClassNotFoundException {
         return service.addAccount(account);
     }
+
+    public Account searchStaffByNameOrID(String input) throws SQLException, ClassNotFoundException {
+        return  service.searchStaffByNameOrID(input);
+    }
 }

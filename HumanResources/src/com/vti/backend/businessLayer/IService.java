@@ -14,4 +14,6 @@ public interface IService {
     List<Account> showEmployeeByDepartment() throws SQLException, ClassNotFoundException;
 
     boolean addAccount(Account account) throws SQLException, ClassNotFoundException;
+
+    Account searchStaffByNameOrID(String input) throws SQLException, ClassNotFoundException;
 }

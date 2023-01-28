@@ -29,6 +29,7 @@ public class Functions {
             System.out.format(leftAlignFormat, "2. Show existing department");
             System.out.format(leftAlignFormat, "3. Show employees by department");
             System.out.format(leftAlignFormat, "4. add account");
+            System.out.format(leftAlignFormat, "5. Search Staff by name or id");
             System.out.println("+----------------------------------------------------------------------------------------+");
     }
 
@@ -127,5 +128,26 @@ public class Functions {
             System.out.println("SQLException or ClassNotFoundException occur !!!");
         }
 
+    }
+
+    public void searchStaffByNameOrID() throws SQLException, ClassNotFoundException {
+        System.out.println("enter name or id of Staff");
+        String input = ScannerUltis.inputString();
+        Account account = controller.searchStaffByNameOrID(input);
+        System.out.println("+----+------------------------+------------------------+------------------------+------------------------+--------+");
+        System.out.println("| ID |        FullName        |        DepartmentID      |          Email         |        password        |  Role  |");
+        System.out.println("+----+------------------------+------------------------+------------------------+------------------------+--------+");
+            String department = null;
+            if (account.getDepartment_id() == 1){
+                department = "ACCOUNTING";
+            } else if (account.getDepartment_id() == 2) {
+                department = "IT";
+            } else if (account.getDepartment_id() == 3) {
+                department = "TECHNICAL";
+            } else if (account.getDepartment_id() == 4) {
+                department = "HUMANRESOURCES";
+            }
+            System.out.format("| %-2d | %-22s | %-22s | %-22s | %-22s | %-6s |%n", account.getId(), account.getName(), department, account.getEmail(), account.getPassword(), account.getRole());
+        System.out.println("+----+------------------------+------------------------+------------------------+------------------------+--------+");
     }
 }
